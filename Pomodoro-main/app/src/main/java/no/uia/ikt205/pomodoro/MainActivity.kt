@@ -13,22 +13,46 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var timer:CountDownTimer
     lateinit var startButton:Button
+    lateinit var sett30mintButton:Button
+    lateinit var sett60mintButton:Button
+    lateinit var sett90mintButton:Button
+    lateinit var sett120mintButton:Button
     lateinit var coutdownDisplay:TextView
 
-    val timeToCountDownInMs = 5000L
+    var timeToCountDownInMs = 5000L
     val timeTicks = 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       startButton = findViewById<Button>(R.id.startCountdownButton)
-       startButton.setOnClickListener(){
-           startCountDown(it)
-       }
-       coutdownDisplay = findViewById<TextView>(R.id.countDownView)
+        startButton = findViewById<Button>(R.id.startCountdownButton)
+        startButton.setOnClickListener(){
+            startCountDown(it)
+            startButton.isEnabled = false;
+        }
+        sett30mintButton = findViewById<Button>(R.id.sett30mintButton)
+        sett30mintButton.setOnClickListener(){
+            timeToCountDownInMs = timeTicks * 60 * 30
+        }
 
+        sett60mintButton = findViewById<Button>(R.id.sett60mintButton)
+        sett60mintButton.setOnClickListener(){
+            timeToCountDownInMs = timeTicks * 60 * 60
+        }
+        sett90mintButton = findViewById<Button>(R.id.sett90mintButton)
+        sett90mintButton.setOnClickListener(){
+            timeToCountDownInMs = timeTicks * 60 * 90
+        }
+        sett120mintButton = findViewById<Button>(R.id.sett120mintButton)
+        sett120mintButton.setOnClickListener(){
+            timeToCountDownInMs = timeTicks * 60 * 120
+        }
+
+        coutdownDisplay = findViewById<TextView>(R.id.countDownView)
     }
+
+
 
     fun startCountDown(v: View){
 
@@ -38,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTick(millisUntilFinished: Long) {
-               updateCountDownDisplay(millisUntilFinished)
+                updateCountDownDisplay(millisUntilFinished)
             }
         }
 
@@ -48,5 +72,7 @@ class MainActivity : AppCompatActivity() {
     fun updateCountDownDisplay(timeInMs:Long){
         coutdownDisplay.text = millisecondsToDescriptiveTime(timeInMs)
     }
+
+
 
 }
