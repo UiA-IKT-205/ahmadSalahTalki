@@ -6,4 +6,7 @@
     <string name="sett60m">60 min</string>
     <string name="sett90m">120 min</string>
     <string name="sett120m">90 min</string>
+    <string name="tid">Tid</string>
+    <string name="pause">Pause</string>
+    <string name="antall_repit">Antall Repit</string>
 </resources>
