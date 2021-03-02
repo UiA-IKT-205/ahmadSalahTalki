@@ -14,8 +14,8 @@ class PianoLayout : Fragment() {
     private var _binding:FragmentPianoBinding? = null
     private val binding get() = _binding!!
 
-    private val fullTones = listOf("C","D","E","F","G","A","B","C2","D2","E2","F2","G2")
-    private val halvTones = listOf("C#", "D#", "F#", "G#", "A#", "C#2", "D#2", "F#2", "G#2", "A#2")
+    private val fullTones = listOf("C","D","E","F","G","A","B","C2","D2","E2","F2","G2","A2","B2")
+    private val halvTones = listOf("C#", "D#","0", "F#", "G#", "A#","0", "C#2", "D#2","0", "F#2", "G#2","A#2")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +27,8 @@ class PianoLayout : Fragment() {
         val view = binding.root
         val fm = childFragmentManager
         val ft = fm.beginTransaction()
-        val fm2 = childFragmentManager
-        val ft2 = fm2.beginTransaction()
+        val fmHalvTones = childFragmentManager
+        val ftHalvTons = fmHalvTones.beginTransaction()
 
         fullTones.forEach {
             val fullTonePianoKey = FullTonePianoKeyFragment.newInstance(it)
@@ -54,9 +54,15 @@ class PianoLayout : Fragment() {
                 println("Piano key up $it")
             }
 
-            ft2.add(view.halvPianoKeys.id,halvTonePianoKey,"note_$it")
+            if(it == "0") {
+                ftHalvTons.add(view.unvisiblePianoKey.id, halvTonePianoKey, "note_$it")
+            }
+            else{
+                ftHalvTons.add (view.halvPianoKeys.id, halvTonePianoKey, "note_$it")
+            }
+
         }
-        ft2.commit()
+        ftHalvTons.commit()
 
         return view
     }
