@@ -2,4 +2,8 @@
     <string name="app_name">SuperPiano</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="file_name_for_tune">file_name_for_tune</string>
+    <string name="lagre" >lagre</string>
+    <string name="load">load</string>
+    <string name="inholde_visess_her">inholde visses her</string>
 </resources>

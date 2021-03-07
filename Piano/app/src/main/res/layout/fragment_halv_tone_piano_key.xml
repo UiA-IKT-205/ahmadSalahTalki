@@ -19,15 +19,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/unvisiblePianoKey"
-        android:layout_width="26dp"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:backgroundTint="@color/material_on_primary_disabled"
-        android:background="@drawable/pianokeyshape"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
