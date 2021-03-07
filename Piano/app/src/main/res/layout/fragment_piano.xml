@@ -22,8 +22,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fullPianoKeys"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
+
+    <EditText
+        android:id="@+id/fileNameTextEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:ems="20"
+        android:hint="@string/file_name_for_tune"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/saveScoreBt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lagre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loadScoreBt"
+        app:layout_constraintTop_toBottomOf="@+id/fullPianoKeys"
+
+        />
+    <Button
+        android:id="@+id/loadScoreBt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/load"
+        app:layout_constraintStart_toEndOf="@+id/fileNameTextEdit"
+        app:layout_constraintBottom_toBottomOf="@+id/saveScoreBt"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
