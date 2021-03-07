@@ -127,6 +127,7 @@ class PianoLayout : Fragment() {
                 }
             }
         }
+        // dette kjører ved trykk på load knapp
         view.loadScoreBt.setOnClickListener{
 
             getAllFilesInResources()
@@ -134,29 +135,31 @@ class PianoLayout : Fragment() {
 
         return view
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+    @RequiresApi(Build.VERSION_CODES.O) // vet ikke helt hva dette er for men koden ville at dette skal stå her
     fun getAllFilesInResources()
     {
-        var text:String = ""
+        var text:String = "" // en tom string. Det som kommer her er en metode å lope gjennom alle filer in en directory
         val projectDirAbsolutePath = Paths.get("").toAbsolutePath().toString()
         val resourcesPath = Paths.get(projectDirAbsolutePath, "/sdcard/Android/data/com.example.superpiano/files")
         val path = Files.walk(resourcesPath)
             .filter { item -> Files.isRegularFile(item) }
             .filter { item -> item.toString().endsWith(".musikk") }
+                //her for hver file in directory så appender file navne til text og det som retuners
+                //fra showTone() og noen stjerner mellom hver file
             .forEach { item -> text += "${item.fileName}\n" + showNote(item) + "**********\n"}
-        println(text)
-        //view?.fileNameTextEdit?.setText(text)
-        val fileExists = AlertDialog.Builder(requireContext())
-        fileExists.setTitle("Your note")
-        fileExists.setMessage(text)
-        fileExists.setNeutralButton("OK",{ dialogInterface: DialogInterface, i: Int -> })
-        fileExists.show()
+        // det som kjer her er pop med innhold text
+        val showNoteMassage = AlertDialog.Builder(requireContext())
+        showNoteMassage.setTitle("Your note")
+        showNoteMassage.setMessage(text)
+        showNoteMassage.setNeutralButton("OK",{ dialogInterface: DialogInterface, i: Int -> })
+        showNoteMassage.show()
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    fun showNote(x:Path): String {
-        val bufferedReader: BufferedReader = File("$x").bufferedReader()
-        val inputString = bufferedReader.use { it.readText() }
-        return inputString
+    fun showNote(path:Path): String { // her er en funksjon som tar i mot path og lese den filen og
+        // skrive innholde til en string
+        val bufferedReader: BufferedReader = File("$path").bufferedReader()
+        val innhold = bufferedReader.use { it.readText() }
+        return innhold
     }
 
 }
