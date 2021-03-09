@@ -1,6 +1,7 @@
 package com.example.superpiano
 
 import android.content.DialogInterface
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import com.example.superpiano.databinding.FragmentPianoBinding
 import kotlinx.android.synthetic.main.fragment_halv_tone_piano_key.view.*
 import kotlinx.android.synthetic.main.fragment_piano.view.*
@@ -27,6 +29,8 @@ import java.nio.file.Path
 
 
 class PianoLayout : Fragment() {
+
+    var onsave:((file:Uri) -> Unit)? = null
 
     private var _binding:FragmentPianoBinding? = null
     private val binding get() = _binding!!
@@ -118,10 +122,12 @@ class PianoLayout : Fragment() {
             }
             else {
                 if (path != null) {
-                    FileOutputStream(File(path, fileName), true).bufferedWriter().use { writer ->
+                    val file = File(path,fileName)
+                    FileOutputStream(file, true).bufferedWriter().use { writer ->
                         score.forEach {
                             writer.write("${it.toString()}\n")
                         }
+                        this.onsave?.invoke(file.toUri())
                     }
                     score.clear()
                 }
